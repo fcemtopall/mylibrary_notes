@@ -13,7 +13,6 @@ class Repository {
         dbQuery {
             UserTable.insert { userTable ->
                 userTable[UserTable.email] = user.email
-                userTable[UserTable.password] = user.password
                 userTable[UserTable.hashedPassword] = user.hashedPassword
                 userTable[UserTable.name] = user.username
             }
@@ -26,10 +25,9 @@ class Repository {
             .singleOrNull()
     }
 
-    private fun rowToUser(row: ResultRow): User? {
+    private fun rowToUser(row: ResultRow): User {
         return User(
             email = row[UserTable.email],
-            password = row[UserTable.password],
             hashedPassword = row[UserTable.hashedPassword],
             username = row[UserTable.name]
         )
